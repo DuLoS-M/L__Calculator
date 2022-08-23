@@ -11,12 +11,17 @@ body {
 }
 
 .main-container {
+    padding: 5px;
+    box-sizing: border-box;
     display: flex;
     flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
     background-color: gray;
     width: 500px;
-    height: 500px;
+    /* height: 500px; */
     background-color: brown;
+    
     
 }
 
@@ -25,7 +30,7 @@ body {
     flex-direction: column;
     background-color: rgb(160, 160, 160);
     height: 17%;
-    width: 100%;
+    width: 480px;
     margin: 5px;
     border-radius: 8px;
     padding: 5px;
@@ -40,6 +45,8 @@ body {
     background-color: rgb(199, 194, 194);
     height: 35%;
     font-size: 20px;
+    word-wrap: break-word;
+    
     
 }
 
@@ -57,7 +64,7 @@ body {
 }
 
 .button-container {
-    height: 83%;
+    height: 380px;
     width: 100%;
     display: flex;
     background-color: blue;
