@@ -21,6 +21,7 @@ function power(a, b) {
 operationsDisplay = document.querySelector('.display-operations');
 resultDisplay = document.querySelector('.display-result');
 
+//Add numbers to the display with buttons
 numberButtons = document.querySelectorAll('.num-input');
 numberButtons.forEach(element => {
     element.addEventListener('click', (e) => {
@@ -28,5 +29,27 @@ numberButtons.forEach(element => {
     })
 
 });
+
+
+
+
+//Add numbers to the display with key presses
+window.addEventListener('keydown', (e) => {
+    numberRegex = /[0-9]/
+    if (numberRegex.test(e.key)) {
+        operationsDisplay.textContent += e.key
+
+    }else if (e.key === '.') {
+        // Check if there is a period already 
+        if(!operationsDisplay.textContent.includes('.')){
+            operationsDisplay.textContent += e.key
+        }
+    }
+
+
+
+})
+
+
 
 
