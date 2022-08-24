@@ -11,7 +11,7 @@ body {
 }
 
 .main-container {
-    padding: 5px;
+    padding: 10px;
     box-sizing: border-box;
     display: flex;
     flex-wrap: wrap;
@@ -19,19 +19,18 @@ body {
     justify-content: center;
     background-color: gray;
     width: 500px;
-    /* height: 500px; */
+
     background-color: brown;
     
     
 }
 
 .display {
+    box-sizing: border-box;
     display: flex;
     flex-direction: column;
     background-color: rgb(160, 160, 160);
-    height: 17%;
     width: 480px;
-    margin: 5px;
     border-radius: 8px;
     padding: 5px;
 }
@@ -43,7 +42,7 @@ body {
 
 .display-operations {
     background-color: rgb(199, 194, 194);
-    height: 35%;
+    min-height: 35px;
     font-size: 20px;
     word-wrap: break-word;
     
@@ -55,7 +54,7 @@ body {
     justify-content: right;
     align-items: flex-end;
     background-color: rgb(80, 80, 80);
-    height: 65%;
+    height: 55px;
     text-align: right;
     font-size: 39px;
     
