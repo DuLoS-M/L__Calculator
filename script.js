@@ -31,8 +31,6 @@ numberButtons.forEach(element => {
 });
 
 
-
-
 //Add numbers to the display with key presses
 window.addEventListener('keydown', (e) => {
     numberRegex = /[0-9]/
@@ -46,9 +44,21 @@ window.addEventListener('keydown', (e) => {
         }
     }
 
-
-
 })
+
+// Remove last input with 'DEL' button
+delButton = document.querySelector('#del-button');
+delButton.addEventListener('click', (e) => {
+    operationsDisplay.textContent = operationsDisplay.textContent.slice(0, -1)
+})
+
+// Clear display with 'AC' button
+acButton = document.querySelector('#ac-button');
+acButton.addEventListener('click', (e) => {
+    operationsDisplay.textContent = '';
+    resultDisplay.textContent = '';
+})
+
 
 
 
