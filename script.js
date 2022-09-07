@@ -1,63 +1,151 @@
-function sum(a, b) {
-    return a + b;
-}
 
-function substraction(a, b) {
-    return a - b;
-}
-
-function multiply(a, b) {
-    return a * b;
-}
-
-function divide(a, b) {
-    return a / b;
-}
-
-function power(a, b) {
-    return a**b;
-}
-
-operationsDisplay = document.querySelector('.display-operations');
+inputDisplay = document.querySelector('.display-operations');
 resultDisplay = document.querySelector('.display-result');
 
 //Add numbers to the display with buttons
 numberButtons = document.querySelectorAll('.num-input');
 numberButtons.forEach(element => {
     element.addEventListener('click', (e) => {
-        operationsDisplay.textContent += e.target.dataset.value       
+        inputDisplay.textContent += e.target.dataset.value    ;   
     })
 
 });
 
+let currentResultValue;
+let currentOperator;
 
-//Add numbers to the display with key presses
 window.addEventListener('keydown', (e) => {
-    numberRegex = /[0-9]/
+    numberRegex = /[0-9]/;
+    
+    // Add numbers to the display with key presses
     if (numberRegex.test(e.key)) {
-        operationsDisplay.textContent += e.key
-
+        
+        inputDisplay.textContent += e.key;
+    
+    // Add decimal point
     }else if (e.key === '.') {
         // Check if there is a period already 
-        if(!operationsDisplay.textContent.includes('.')){
-            operationsDisplay.textContent += e.key
+        if(!inputDisplay.textContent.includes('.')){
+            inputDisplay.textContent += e.key;
         }
+
+    // Add operators
+    }else if (e.key === '+') {
+        currentOperator = '+';
+        addOperator(currentOperator);
+
+    }else if (e.key === '-') {
+        currentOperator = '-';
+        addOperator(currentOperator);
+
+    }else if (e.key === '/') {
+        currentOperator = '/';
+        addOperator(currentOperator);
+
+    }else if (e.key === '*') {
+        currentOperator = '*';
+        addOperator(currentOperator);
+
+    }else if (e.key === '^') {
+        currentOperator = '^';
+        addOperator(currentOperator);
+        
+    }else if (e.key === 'Enter') {
+        performOperation();
     }
 
 })
 
+
+function addOperator(operator){
+    
+    if(!currentResultValue) {
+        currentResultValue = Number(inputDisplay.textContent);
+        resultDisplay.textContent = currentResultValue;
+        inputDisplay.textContent = `${operator}`;
+
+    // Place an operator at the begining of the input if there is none
+    }else if(numberRegex.test(inputDisplay.textContent.charAt(0))) {
+        inputDisplay.textContent = `${operator}${inputDisplay.textContent}`;
+    
+    // If there is an operator, perform the operation
+    } else {
+        performOperation();
+        inputDisplay.textContent = `${operator}`;
+    }
+
+    currentOperator = operator;
+
+}
+
+// 
+
+function performOperation() {
+
+    // Prevent operations with an empty input
+    if (!inputDisplay.textContent.substr(1)){
+        return;
+    }
+    inputValue = Number(inputDisplay.textContent.substr(1))
+    
+    switch(currentOperator){
+        case '+':
+            currentResultValue = currentResultValue + inputValue;
+            break;
+
+        case '-':
+            currentResultValue = currentResultValue - inputValue;
+            break;
+
+        case '/':
+            currentResultValue = currentResultValue / inputValue;
+            break;
+
+        case '*':
+            currentResultValue = currentResultValue * inputValue;
+            break;
+    
+        case '^':
+            currentResultValue = currentResultValue ** inputValue;
+            break;
+
+        // If no operator is selected, just display input in the result display
+        default:
+            if(inputDisplay.textContent != '') {
+                currentResultValue = Number(inputDisplay.textContent);
+
+            }
+        
+    }
+
+    resultDisplay.textContent = currentResultValue;
+    inputDisplay.textContent = '';
+    currentOperator = '';
+    
+}
+
+
 // Remove last input with 'DEL' button
 delButton = document.querySelector('#del-button');
 delButton.addEventListener('click', (e) => {
-    operationsDisplay.textContent = operationsDisplay.textContent.slice(0, -1)
+    inputDisplay.textContent = inputDisplay.textContent.slice(0, -1);
 })
 
-// Clear display with 'AC' button
+// Clear everything with 'AC' button
 acButton = document.querySelector('#ac-button');
 acButton.addEventListener('click', (e) => {
-    operationsDisplay.textContent = '';
+    inputDisplay.textContent = '';
     resultDisplay.textContent = '';
+    resultDisplay.textContent = '';
+    currentResultValue = '';
+    inputDisplay.textContent = '';
+    currentOperator = '';
 })
+
+
+
+
+
 
 
 
